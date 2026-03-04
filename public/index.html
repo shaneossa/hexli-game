@@ -9,95 +9,95 @@
     html, body {
       width: 100%; height: 100%;
       background: #1a1a2e;
-      display: flex; align-items: center; justify-content: center;
       overflow: hidden;
-      font-family: 'Georgia', serif;
     }
-    #canvas {
-      display: block;
-      image-rendering: pixelated;
-      image-rendering: crisp-edges;
-    }
-    #ui {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      pointer-events: none;
-    }
-    #hud {
-      position: absolute;
-      top: 12px; left: 12px;
-      color: #fff;
-      text-shadow: 1px 1px 0 #000, -1px -1px 0 #000;
-      font-size: 13px;
-      line-height: 1.6;
-    }
-    #collectibles {
-      position: absolute;
-      top: 12px; right: 12px;
-      color: #fff;
-      text-shadow: 1px 1px 0 #000;
-      font-size: 13px;
-      text-align: right;
-    }
+    #game-container canvas { display: block; }
+
     #dialog {
-      position: absolute;
-      bottom: 24px; left: 50%; transform: translateX(-50%);
-      background: rgba(20,10,30,0.92);
-      border: 2px solid #b06fd8;
-      border-radius: 8px;
-      padding: 12px 20px;
-      color: #f0e6ff;
-      font-size: 14px;
-      max-width: 480px;
-      width: 90%;
-      text-align: center;
       display: none;
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(520px, 90vw);
+      background: rgba(15, 8, 25, 0.95);
+      border: 2px solid #b060d0;
+      border-radius: 10px;
+      padding: 14px 20px;
+      color: #f0e8ff;
+      font-family: 'Georgia', serif;
+      font-size: 15px;
+      line-height: 1.5;
+      z-index: 100;
       pointer-events: none;
     }
-    #dialog .speaker {
-      color: #d48fff;
-      font-weight: bold;
-      margin-bottom: 4px;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    #controls-hint {
-      position: absolute;
-      bottom: 12px; right: 12px;
-      color: rgba(255,255,255,0.5);
+    #dialog-speaker {
+      color: #d080ff;
       font-size: 11px;
-      text-align: right;
-      line-height: 1.8;
-    }
-    #room-label {
-      position: absolute;
-      top: 12px; left: 50%; transform: translateX(-50%);
-      color: rgba(255,255,255,0.7);
-      font-size: 12px;
       letter-spacing: 2px;
       text-transform: uppercase;
-      text-shadow: 1px 1px 0 #000;
+      margin-bottom: 6px;
+    }
+    #dialog-hint {
+      margin-top: 8px;
+      font-size: 10px;
+      color: rgba(255,255,255,0.35);
+      text-align: right;
+      font-family: monospace;
+    }
+    #hud {
+      position: fixed;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.75);
+      font-family: 'Georgia', serif;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+      pointer-events: none;
+      z-index: 100;
+    }
+    #collect-hud {
+      position: fixed;
+      top: 14px;
+      right: 18px;
+      color: rgba(255,255,255,0.8);
+      font-family: 'Georgia', serif;
+      font-size: 13px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+      pointer-events: none;
+      z-index: 100;
+    }
+    #controls {
+      position: fixed;
+      bottom: 14px;
+      right: 18px;
+      color: rgba(255,255,255,0.3);
+      font-family: monospace;
+      font-size: 10px;
+      line-height: 1.8;
+      text-align: right;
+      pointer-events: none;
+      z-index: 100;
     }
   </style>
 </head>
 <body>
-  <canvas id="canvas"></canvas>
-  <div id="ui">
-    <div id="hud">
-      <div id="location-name"></div>
-    </div>
-    <div id="room-label"></div>
-    <div id="collectibles">🧶 <span id="collect-count">0</span> / <span id="collect-total">0</span></div>
-    <div id="dialog">
-      <div class="speaker" id="dialog-speaker"></div>
-      <div id="dialog-text"></div>
-    </div>
-    <div id="controls-hint">
-      Arrow keys / WASD — move<br>
-      E — interact
-    </div>
+  <div id="game-container"></div>
+  <div id="hud"></div>
+  <div id="collect-hud">🧶 <span id="cc">0</span>/<span id="ct">7</span></div>
+  <div id="dialog">
+    <div id="dialog-speaker"></div>
+    <div id="dialog-text"></div>
+    <div id="dialog-hint">[ E ] to continue</div>
   </div>
+  <div id="controls">
+    WASD / ↑↓←→ move<br>
+    E — talk / interact
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
   <script src="game.js"></script>
 </body>
 </html>
